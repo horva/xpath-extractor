@@ -15,7 +15,7 @@ def home():
             result = form.resolve()
             message = 'Found following results:' if result else 'No results.'
         except Exception as ex:
-            message = str(ex)
+            message = unicode(ex)
     return render_template('base.html', form=form, result=result,
         message=message)
 
