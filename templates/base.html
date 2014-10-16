@@ -29,16 +29,17 @@
             <button type="submit" class="btn btn-default">Submit</button>
             <a href="/" class="btn btn-default">Clear</a>
         </form>
+        {% if message %}
+            <div class="message">
+                {{ message }}
+            </div>
+        {% endif %}
         {% if result %}
             <ul class="result list-group">
                 {% for line in result %}
                     <li class="list-group-item">{{ line }}</li>
                 {% endfor %}
             </ul>
-        {% else %}
-            <div class="result">
-                There is not results for this query.
-            </div>
         {% endif %}
     </div>
 </body>
