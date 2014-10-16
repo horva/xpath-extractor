@@ -35,6 +35,10 @@
                     <li class="list-group-item">{{ line }}</li>
                 {% endfor %}
             </ul>
+        {% else %}
+            <div class="result">
+                There is not results for this query.
+            </div>
         {% endif %}
     </div>
 </body>
