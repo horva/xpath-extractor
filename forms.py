@@ -11,4 +11,4 @@ class XPathExtractorForm(Form):
 
     def resolve(self):
         sel = XPathSelector(text=self.data['html'])
-        return sel.xpath(self.data['xpath']).extract()
+        return [x for x in sel.xpath(self.data['xpath']).extract() if x.strip()]
