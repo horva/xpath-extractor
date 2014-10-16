@@ -13,3 +13,7 @@ Later we may add ability to pass a list of xpath expressions, each having fallba
 ## Running the app
 
     python app.py
+
+## Screenshot
+
+![Alt text](/static/img/xpath-extractor-screenshot.jpg?raw=true "XPath Extractor Screenshot")
