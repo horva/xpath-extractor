@@ -4,7 +4,7 @@ import requests
 from wtforms.form import Form
 from wtforms.fields import TextAreaField, StringField
 from wtforms import validators
-from scrapy.selector import XPathSelector
+from scrapy.selector import Selector
 
 
 class XPathExtractorForm(Form):
@@ -18,5 +18,4 @@ class XPathExtractorForm(Form):
             resp = requests.get(self.data['html'].strip())
             if resp.status_code == 200:
                 html = resp.content
-        sel = XPathSelector(text=html)
-        return [x for x in sel.xpath(xpath).extract() if x.strip()]
+        return [x for x in Selector(text=html).xpath(xpath).extract() if x.strip()]
