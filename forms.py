@@ -6,6 +6,8 @@ from wtforms.fields import TextAreaField, StringField
 from wtforms import validators
 from scrapy.selector import Selector
 
+from config import USER_AGENT
+
 
 class XPathExtractorForm(Form):
     xpath = StringField(validators=[validators.required()])
@@ -15,7 +17,10 @@ class XPathExtractorForm(Form):
         html = self.data['html']
         xpath = self.data['xpath']
         if re.match('http.*://.*\..*', html):
-            resp = requests.get(self.data['html'].strip())
+            headers = {
+                'User-Agent': USER_AGENT
+            }
+            resp = requests.get(self.data['html'].strip(), headers=headers)
             if resp.status_code == 200:
                 html = resp.content
         return [x for x in Selector(text=html).xpath(xpath).extract() if x.strip()]
