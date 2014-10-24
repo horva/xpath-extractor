@@ -8,6 +8,9 @@ from scrapy.selector import Selector
 
 from config import USER_AGENT
 
+from utils import xpath
+xpath.setup()
+
 
 class XPathExtractorForm(Form):
     xpath = StringField(validators=[validators.required()])
