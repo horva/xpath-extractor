@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import re
 
 import requests
@@ -25,5 +26,5 @@ class XPathExtractorForm(Form):
             }
             resp = requests.get(self.data['html'].strip(), headers=headers)
             if resp.status_code == 200:
-                html = resp.content
-        return [x for x in Selector(text=html).xpath(xpath).extract() if x.strip()]
+                html = resp.content.decode(resp.encoding)
+        return [x for x in Selector(text=html).xpath(xpath).extract() if x.strip()], html, xpath

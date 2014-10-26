@@ -12,12 +12,12 @@ def home():
     form = XPathExtractorForm(request.form)
     if request.method == 'POST' and form.validate():
         try:
-            result = form.resolve()
+            result, html, xpath = form.resolve()
+            form = XPathExtractorForm(html=html, xpath=xpath)
             message = 'Found following results:' if result else 'No results.'
         except Exception as ex:
             message = unicode(ex)
-    return render_template('base.html', form=form, result=result,
-        message=message)
+    return render_template('base.html', form=form, result=result, message=message)
 
 
 if __name__ == '__main__':
