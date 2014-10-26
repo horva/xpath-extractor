@@ -13,8 +13,8 @@ xpath.setup()
 
 
 class XPathExtractorForm(Form):
-    xpath = StringField(validators=[validators.required()])
-    html = TextAreaField(validators=[validators.required()])
+    xpath = StringField("XPATH", validators=[validators.required()])
+    html = TextAreaField("HTML or URL", validators=[validators.required()])
 
     def resolve(self):
         html = self.data['html']

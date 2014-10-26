@@ -1,5 +1,17 @@
 .page-heading-container {
     margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.page-heading-container .title {
+    color: #60a839;
+    margin-bottom: 5px;
+    font-weight: 200;
+}
+
+.page-heading-container .subtitle {
+    color: #a97c50;
+    font-weight: 200;
 }
 
 .result {
@@ -12,4 +24,8 @@
 
 .code {
     font-family: 'Courier New';
+}
+
+#html {
+    height: 70px;
 }
