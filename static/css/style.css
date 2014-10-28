@@ -31,3 +31,7 @@
 #html {
     height: 70px;
 }
+
+.head-link:hover {
+    text-decoration: none;
+}
