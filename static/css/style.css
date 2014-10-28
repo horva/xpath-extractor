@@ -10,8 +10,10 @@
 }
 
 .page-heading-container .subtitle {
+    margin-left: 15px;
     color: #a97c50;
     font-weight: 200;
+    font-size: 80%;
 }
 
 .result {
