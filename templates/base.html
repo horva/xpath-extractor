@@ -35,6 +35,15 @@
                     {% endfor %}
                 {% endif %}
             </div>
+            <div class="form-group {% if form.subxpath.errors %}has-error{% endif %}">
+                {{ form.subxpath.label }}
+                {{ form.subxpath(class="form-control") }}
+                {% if form.subxpath.errors %}
+                    {% for error in form.subxpath.errors %}
+                        <label class="control-label">{{ error }}</label>
+                    {% endfor %}
+                {% endif %}
+            </div>
             <div class="form-group {% if form.html.errors %}has-error{% endif %}">
                 {{ form.html.label }}
                 {{ form.html(class="form-control code") }}
@@ -53,11 +62,27 @@
             </div>
         {% endif %}
         {% if result %}
-            <ul class="result list-group">
-                {% for line in result %}
-                    <li class="list-group-item">{{ line }}</li>
+            {% if form.subxpath.data %}
+                {% for i, subresults in result %}
+                    <h4>
+                        Results for element {{ i }}
+                        <span class="label label-{{ subresults and "default" or "warning" }}">{{ subresults|length }} found</span>
+                    </h4>
+                    {% if subresults %}
+                        <ul class="result list-group">
+                            {% for line in subresults %}
+                                <li class="list-group-item">{{ line }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                 {% endfor %}
-            </ul>
+            {% else %}
+                <ul class="result list-group">
+                    {% for line in result %}
+                        <li class="list-group-item">{{ line }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         {% endif %}
     </div>
 </body>

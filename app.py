@@ -12,8 +12,8 @@ def home():
     form = XPathExtractorForm(request.form)
     if request.method == 'POST' and form.validate():
         try:
-            result, html, xpath = form.resolve()
-            form = XPathExtractorForm(html=html, xpath=xpath)
+            result, html, xpath, subxpath = form.resolve()
+            form = XPathExtractorForm(html=html, xpath=xpath, subxpath=subxpath)
             message = 'Found following results:' if result else 'No results.'
         except Exception as ex:
             message = unicode(ex)
