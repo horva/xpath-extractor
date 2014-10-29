@@ -30,6 +30,15 @@
             </a>
         </div>
         <form class="main-form" role="form" method="post">
+            <div class="form-group {% if form.html.errors %}has-error{% endif %}">
+                {{ form.html.label }}
+                {{ form.html(class="form-control code") }}
+                {% if form.html.errors %}
+                    {% for error in form.html.errors %}
+                        <label class="control-label">{{ error }}</label>
+                    {% endfor %}
+                {% endif %}
+            </div>
             <div class="form-group {% if form.xpath.errors %}has-error{% endif %}">
                 {{ form.xpath.label }}
                 {{ form.xpath(class="form-control") }}
@@ -44,15 +53,6 @@
                 {{ form.subxpath(class="form-control") }}
                 {% if form.subxpath.errors %}
                     {% for error in form.subxpath.errors %}
-                        <label class="control-label">{{ error }}</label>
-                    {% endfor %}
-                {% endif %}
-            </div>
-            <div class="form-group {% if form.html.errors %}has-error{% endif %}">
-                {{ form.html.label }}
-                {{ form.html(class="form-control code") }}
-                {% if form.html.errors %}
-                    {% for error in form.html.errors %}
                         <label class="control-label">{{ error }}</label>
                     {% endfor %}
                 {% endif %}
