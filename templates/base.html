@@ -10,11 +10,17 @@
     <script type="text/javascript">
 
         $(function() {
-            // focus path input
-            var input = $('#xpath');
-            input.focus();
-            var val = input.val();
-            input.val('').val(val);
+            // resolve input focus
+            var $xpath_input = $('#xpath');
+            var $html_input = $('#html');
+
+            if ($.trim($html_input.val()) == '') {
+                $html_input.focus()
+            } else {
+                $xpath_input.focus();
+                var val = $xpath_input.val();
+                $xpath_input.val('').val(val);
+            }
         });
 
     </script>
