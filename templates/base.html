@@ -67,34 +67,39 @@
             <button type="submit" class="btn btn-primary btn-lg">Extract</button>
             | <a href="/">Clear</a>
         </form>
-        {% if message %}
-            <div class="message">
-                {{ message }}
-            </div>
-        {% endif %}
-        {% if result %}
-            {% if form.subxpath.data %}
-                {% for i, subresults in result %}
-                    <h4>
-                        Results for element {{ i }}
-                        <span class="label label-{{ subresults and "default" or "warning" }}">{{ subresults|length }} found</span>
-                    </h4>
-                    {% if subresults %}
-                        <ul class="result list-group">
-                            {% for line in subresults %}
-                                <li class="list-group-item">{{ line }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                {% endfor %}
-            {% else %}
-                <ul class="result list-group">
-                    {% for line in result %}
-                        <li class="list-group-item">{{ line }}</li>
-                    {% endfor %}
-                </ul>
+        <div class="results-holder">
+            {% if message %}
+                <div class="message">
+                    {{ message }}
+                </div>
             {% endif %}
-        {% endif %}
+            {% if result %}
+                {% if form.subxpath.data %}
+                    {% for i, subresults in result %}
+                        <h4>
+                            Results for element {{ i }}
+                            <span class="label label-{{ subresults and "info" or "warning" }}">{{ subresults|length }} found</span>
+                        </h4>
+                        {% if subresults %}
+                            <ul class="result list-group">
+                                {% for line in subresults %}
+                                    <li class="list-group-item">{{ line }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <h4><span class="label label-{{ result and "info" or "warning" }}">{{ result|length }}</span> results found</h4>
+                    <ul class="result list-group">
+                        {% for line in result %}
+                            <li class="list-group-item">{{ line }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% else %}
+                <h4>No results found.</h4>
+            {% endif %}
+        </div>
     </div>
 </body>
 </html>

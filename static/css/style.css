@@ -16,6 +16,10 @@
     font-size: 80%;
 }
 
+.results-holder {
+    margin-top: 20px;
+}
+
 .result {
   margin-top: 20px;
 }

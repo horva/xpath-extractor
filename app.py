@@ -14,7 +14,6 @@ def home():
         try:
             result, html, xpath, subxpath = form.resolve()
             form = XPathExtractorForm(html=html, xpath=xpath, subxpath=subxpath)
-            message = 'Found following results:' if result else 'No results.'
         except Exception as ex:
             message = unicode(ex)
     return render_template('base.html', form=form, result=result, message=message)
