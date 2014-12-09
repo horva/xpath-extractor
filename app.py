@@ -30,7 +30,10 @@ def _save_session(data, session_id=None):
 
 def _load_session(session_id):
     redis_connection = _get_redis_connection()
-    return json.loads(redis_connection.get(REDIS_PREFIX + session_id))
+    data = redis_connection.get(REDIS_PREFIX + session_id)
+    if data:
+        return json.loads(data)
+    return None
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -42,6 +45,8 @@ def home(session_id=None):
 
     if request.method == 'GET' and session_id:
         form_kw = _load_session(session_id)
+        if not form_kw:
+            return redirect(url_for('home'))
         form = XPathExtractorForm(**form_kw)
         result, html, xpath, subxpath = form.resolve()
 
