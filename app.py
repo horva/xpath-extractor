@@ -8,6 +8,9 @@ import json
 from forms import XPathExtractorForm
 
 
+REDIS_PREFIX = 'xpath-extractor:'
+
+
 def _get_redis_connection():
     return redis.Redis()
 
@@ -21,13 +24,13 @@ def _save_session(data, session_id=None):
         session_id = _get_new_session_id()
     data = json.dumps(data)
     redis_connection = _get_redis_connection()
-    redis_connection.set(session_id, data)
+    redis_connection.set(REDIS_PREFIX + session_id, data)
     return session_id
 
 
 def _load_session(session_id):
     redis_connection = _get_redis_connection()
-    return json.loads(redis_connection.get(session_id))
+    return json.loads(redis_connection.get(REDIS_PREFIX + session_id))
 
 
 @app.route('/', methods=['POST', 'GET'])
