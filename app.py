@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for
-app = Flask(__name__)
 
 from uuid import uuid4
 import redis
 import json
 
 from forms import XPathExtractorForm
+
+app = Flask(__name__)
+app.config.from_object('config')
 
 
 REDIS_PREFIX = 'xpath-extractor:'
@@ -66,4 +68,4 @@ def home(session_id=None):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
