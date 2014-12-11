@@ -19,12 +19,11 @@ def _get_new_session_id():
     return uuid4().hex
 
 
-def _save_session(data, session_id=None):
-    if not session_id:
-        session_id = _get_new_session_id()
+def _save_session(data):
+    session_id = _get_new_session_id()
     data = json.dumps(data)
     redis_connection = _get_redis_connection()
-    redis_connection.set(REDIS_PREFIX + session_id, data)
+    redis_connection.setex(REDIS_PREFIX + session_id, data, 3600 * 24 * 7)  # expire in 7 days
     return session_id
 
 
@@ -58,7 +57,7 @@ def home(session_id=None):
                 'xpath': xpath,
                 'subxpath': subxpath
             }
-            session_id = _save_session(form_kw, session_id)
+            session_id = _save_session(form_kw)
             return redirect(url_for('home', session_id=session_id))
         except Exception as ex:
             message = unicode(ex)
