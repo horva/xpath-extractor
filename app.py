@@ -49,12 +49,13 @@ def home(session_id=None):
         if not form_kw:
             return redirect(url_for('home'))
         form = XPathExtractorForm(**form_kw)
-        result, html, xpath, subxpath = form.resolve()
+        result, html, url, xpath, subxpath = form.resolve()
 
     elif request.method == 'POST' and form.validate():
         try:
-            result, html, xpath, subxpath = form.resolve()
+            result, html, url, xpath, subxpath = form.resolve()
             form_kw = {
+                'url': url,
                 'html': html,
                 'xpath': xpath,
                 'subxpath': subxpath
@@ -64,7 +65,10 @@ def home(session_id=None):
         except Exception as ex:
             message = unicode(ex)
 
-    return render_template('base.html', form=form, result=result, message=message)
+    return render_template(
+        'base.html', form=form, result=result, message=message, session_id=session_id,
+        current_url=request.url
+    )
 
 
 if __name__ == '__main__':

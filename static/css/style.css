@@ -1,5 +1,5 @@
 .page-heading-container {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     margin-top: 20px;
 }
 
@@ -14,6 +14,10 @@
     color: #a97c50;
     font-weight: 200;
     font-size: 80%;
+}
+
+.share-session-container {
+    margin-bottom: 15px;
 }
 
 .results-holder {

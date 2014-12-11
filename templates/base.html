@@ -22,6 +22,11 @@
                 var val = $xpath_input.val();
                 $xpath_input.val('').val(val);
             }
+
+            $('#html').on('input propertychange change keyup paste', function() {
+                $('#url').val('');
+                console.log("AAA");
+            });
         });
 
     </script>
@@ -36,9 +41,17 @@
                 </h4>
             </a>
         </div>
+
+        {% if session_id %}
+            <div class="share-session-container">
+                <div>Share your session with others <code>{{ current_url }}</code></div>
+            </div>
+        {% endif %}
+
         <form class="main-form" role="form" method="post">
+            {{ form.url() }}
             <div class="form-group {% if form.html.errors %}has-error{% endif %}">
-                {{ form.html.label }}
+                {{ form.html.label }} <label>{% if form.url.data %}({{ form.url.data }}){% endif %}</label>
                 {{ form.html(class="form-control code") }}
                 {% if form.html.errors %}
                     {% for error in form.html.errors %}
